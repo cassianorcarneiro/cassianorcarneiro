@@ -1,7 +1,5 @@
 ![Cassiano's GitHub stats](https://github-readme-stats.vercel.app/api?username=cassianorcarneiro&show_icons=true&theme=radical)
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=cassianorcarneiro&layout=donut)](https://github.com/cassianorcarneiro/github-readme-stats)
-
 ## Tecnologias que utilizo no dia a dia
 
 <div style="display: inline_block">
