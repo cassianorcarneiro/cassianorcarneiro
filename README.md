@@ -1,6 +1,4 @@
-## Olá! Eu sou o Cassiano Carneiro 🙋🏻‍♂️
-
-![Cassiano's GitHub stats](https://github-readme-stats.vercel.app/api?username=cassianorcarneiro&show_icons=true&theme=radical)
+## Olá! Sou o Cassiano 🙋🏻‍♂️
 
 ## Tecnologias que utilizo no dia a dia
 
