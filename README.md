@@ -47,16 +47,20 @@ Gosto de construir soluções que unem **teoria matemática, software e engenhar
 ## 🌐 Onde me encontrar
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/cassianorcarneiro" style="text-decoration:none;">
-    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
+  <a href="https://www.linkedin.com/in/SEU_LINKEDIN">
+    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
   </a>
-  &nbsp;
-  <a href="mailto: cassianorcarneiro@outlook.com" style="text-decoration:none;">
-    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
+</p>
+
+<p align="center">
+  <a href="mailto:SEU_EMAIL">
+    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
   </a>
-  &nbsp;
-  <a href="https://www.instagram.com/cassianorcarneiro" style="text-decoration:none;">
-    <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white"/>
+</p>
+
+<p align="center">
+  <a href="https://www.instagram.com/SEU_INSTAGRAM">
+    <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" />
   </a>
 </p>
 
