@@ -43,27 +43,3 @@ Gosto de construir soluções que unem **teoria matemática, software e engenhar
 </p>
 
 ---
-
-## 🌐 Onde me encontrar
-
-<table align="center">
-  <tr>
-    <td align="center">
-      <a href="https://www.linkedin.com/in/SEU_LINKEDIN">
-        <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
-      </a>
-    </td>
-    <td align="center">
-      <a href="mailto:SEU_EMAIL">
-        <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://www.instagram.com/SEU_INSTAGRAM">
-        <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white"/>
-      </a>
-    </td>
-  </tr>
-</table>
-
----
