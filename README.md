@@ -2,14 +2,14 @@
 ### ⚡ Engenheiro | Programador | Entusiasta em IA, Ciência e Sistemas Computacionais
 
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=SEU_USUARIO&style=for-the-badge&color=blue" alt="Profile views"/>
-  <img src="https://img.shields.io/github/followers/SEU_USUARIO?style=for-the-badge&color=yellow" alt="Followers"/>
+  <img src="https://komarev.com/ghpvc/?username=cassianorcarneiro&style=for-the-badge&color=blue" alt="Profile views"/>
+  <img src="https://img.shields.io/github/followers/cassianorcarneiro?style=for-the-badge&color=yellow" alt="Followers"/>
 </p>
 
 ---
 
 ## 🧠 Sobre mim
-Sou engenheiro elétrico com forte interesse em **inteligência artificial, ciência de dados, sistemas computacionais, eletrônica e filosofia**.  
+Sou engenheiro eletricista com forte interesse em **inteligência artificial, ciência de dados, sistemas computacionais, eletrônica e filosofia**.  
 Gosto de construir soluções que unem **teoria matemática, software e engenharia prática**.
 
 ---
@@ -32,8 +32,8 @@ Gosto de construir soluções que unem **teoria matemática, software e engenhar
 ## 📊 Estatísticas do GitHub
 
 <p align="center">
-  <img height="160em" src="https://github-readme-stats.vercel.app/api?username=SEU_USUARIO&show_icons=true&theme=tokyonight&hide_border=true"/>
-  <img height="160em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=SEU_USUARIO&layout=compact&theme=tokyonight&hide_border=true"/>
+  <img height="160em" src="https://github-readme-stats.vercel.app/api?username=cassianorcarneiro&show_icons=true&theme=tokyonight&hide_border=true"/>
+  <img height="160em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=cassianorcarneiro&layout=compact&theme=tokyonight&hide_border=true"/>
 </p>
 
 ---
@@ -41,10 +41,10 @@ Gosto de construir soluções que unem **teoria matemática, software e engenhar
 ## 🌐 Onde me encontrar
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/SEU_LINKEDIN">
+  <a href="https://www.linkedin.com/in/cassianorcarneiro">
     <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
   </a>
-  <a href="mailto:SEU_EMAIL">
+  <a href="mailto: cassianorcarneiro@outlook.com">
     <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
   </a>
 </p>
