@@ -32,11 +32,17 @@ Gosto de construir soluções que unem **teoria matemática, software e engenhar
 ## 📊 Estatísticas do GitHub
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=SEU_USUARIO&show_icons=true&theme=dark&hide_border=true&cache_seconds=86400" />
+  <img 
+    src="https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api?username=cassianorcarneiro&show_icons=true&theme=transparent&hide_border=true&cache_seconds=86400" 
+    height="170"
+  />
 </p>
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=SEU_USUARIO&layout=compact&theme=dark&hide_border=true&cache_seconds=86400" />
+  <img 
+    src="https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api/top-langs/?username=cassianorcarneiro&layout=compact&theme=transparent&hide_border=true&cache_seconds=86400" 
+    height="170"
+  />
 </p>
 
 ---
