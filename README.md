@@ -1,45 +1,54 @@
-# 👋 Olá! Sou o Cassiano  
-### ⚡ Mestre em Engenharia Elétrica | Programador | Pesquisador em Data Science e Machine Learning
+# 👋 Cassiano R. Carneiro  
+
+### ⚡ Engenheiro Eletricista (M.Sc.) | Machine Learning | Data Science | Sistemas Computacionais
 
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=cassianorcarneiro&style=for-the-badge&color=blue" alt="Profile views"/>
-  <img src="https://img.shields.io/github/followers/cassianorcarneiro?style=for-the-badge&color=yellow" alt="Followers"/>
+  <img src="https://komarev.com/ghpvc/?username=cassianorcarneiro&style=for-the-badge&color=blue"/>
+  <img src="https://img.shields.io/github/followers/cassianorcarneiro?style=for-the-badge&color=yellow"/>
 </p>
 
 ---
 
 ## 🧠 Sobre mim
-Sou mestre em engenharia elétrica (UFJF/USP) com grande interesse em **inteligência artificial, ciência de dados e sistemas eletrônicos**.  
-Gosto de construir soluções que unem **criatividade, embasamento teórico e técnicas avançadas de engenharia**.
+
+Sou **mestre em Engenharia Elétrica (UFJF/USP)**, com foco em **modelagem matemática, aprendizado de máquina e sistemas computacionais complexos**.
+
+Meu trabalho transita entre:
+- **fundamentos teóricos** (estatística, otimização, álgebra linear),
+- **implementação prática** (software, pipelines de dados, modelos de ML),
+- e **engenharia de sistemas**, unindo eletrônica, computação e inteligência artificial.
+
+Tenho interesse especial em problemas onde **estrutura, dados e incerteza** se encontram.
 
 ---
 
-## 🚀 Tecnologias & Ferramentas
+## 🔬 Áreas de Interesse
 
-<p align="center">
-  <!-- Linguagens & Frontend -->
-  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
-  <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white"/>
-  <img src="https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white"/>
-
-  <br/>
-
-  <!-- IA & Ciência de Dados -->
-  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white"/>
-  <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white"/>
-  <img src="https://img.shields.io/badge/🤗%20Transformers-FFD21E?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/R--Studio-75AADB?style=for-the-badge&logo=rstudio&logoColor=white"/>
-
-  <br/>
-
-  <!-- Cloud & Plataformas -->
-  <img src="https://img.shields.io/badge/Microsoft_Azure-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Salesforce-00A1E0?style=for-the-badge&logo=salesforce&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white"/>
-</p>
+- Machine Learning & Deep Learning  
+- Ciência de Dados aplicada  
+- Modelos estatísticos e probabilísticos  
+- Sistemas eletrônicos e computacionais  
+- IA aplicada a problemas de engenharia  
 
 ---
+
+## 🛠️ Tecnologias & Ferramentas
+
+### Linguagens
+Python · C/C++ · JavaScript · R  
+
+### Machine Learning & Data Science
+PyTorch · TensorFlow · Hugging Face Transformers · NumPy · Pandas  
+
+### Desenvolvimento & Plataformas
+React · HTML · CSS · Azure · Oracle · Salesforce  
+
+---
+
+## 📌 O que você encontra aqui
+
+- Experimentos em **machine learning e data science**
+- Projetos envolvendo **modelagem e simulação**
+- Estudos e implementações de **algoritmos**
+- Repositórios educacionais e exploratórios
+  
