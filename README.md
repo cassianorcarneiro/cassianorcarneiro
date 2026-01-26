@@ -9,7 +9,7 @@
 ---
 
 ## 🧠 Sobre mim
-Sou mestre em engenharia elétrica com grande interesse em **inteligência artificial, ciência de dados e sistemas eletrônicos**.  
+Sou mestre em engenharia elétrica (UFJF/USP) com grande interesse em **inteligência artificial, ciência de dados e sistemas eletrônicos**.  
 Gosto de construir soluções que unem **criatividade, embasamento teórico e técnicas avançadas de engenharia**.
 
 ---
