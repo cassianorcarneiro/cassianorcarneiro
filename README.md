@@ -1,5 +1,5 @@
-# 👋 Olá! Eu sou o Cassiano  
-### ⚡ Engenheiro | Programador | Entusiasta em IA, Análise de Dados e Eletrônica
+# 👋 Olá! Sou o Cassiano  
+### ⚡ MSc. Engenheiro Eletricista | Programador
 
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=cassianorcarneiro&style=for-the-badge&color=blue" alt="Profile views"/>
@@ -9,8 +9,8 @@
 ---
 
 ## 🧠 Sobre mim
-Sou engenheiro eletricista com forte interesse em **inteligência artificial, ciência de dados, sistemas computacionais e eletrônica**.  
-Gosto de construir soluções que unem **teoria matemática, software e engenharia prática**.
+Sou mestre em engenharia elétrica com grande interesse em **inteligência artificial, ciência de dados e sistemas eletrônicos**.  
+Gosto de construir soluções que unem **criatividade, embasamento teórico e técnicas avançadas de engenharia**.
 
 ---
 
