@@ -1,4 +1,4 @@
-# 👋 Cassiano R. Carneiro  
+# 👋 Cassiano Carneiro  
 
 ### ⚡ Engenheiro Eletricista (M.Sc.) | Machine Learning | Data Science | Sistemas Computacionais
 
