@@ -1,5 +1,5 @@
 # 👋 Olá! Sou o Cassiano  
-### ⚡ MSc. Engenheiro Eletricista | Programador
+### ⚡ Mestre em Engenharia Elétrica | Programador | Pesquisador em Data Science e Machine Learning
 
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=cassianorcarneiro&style=for-the-badge&color=blue" alt="Profile views"/>
