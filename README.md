@@ -1,6 +1,6 @@
 # 👋 Cassiano Carneiro  
 
-### ⚡ Engenheiro Eletricista (M.Sc.) | Machine Learning | Data Science | Sistemas Computacionais
+### ⚡ Engenheiro Eletricista (M.Sc.) | Programador | Pesquisador em Machine Learning e Data Science
 
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=cassianorcarneiro&style=for-the-badge&color=blue"/>
