@@ -51,4 +51,11 @@ React · HTML · CSS · Azure · Oracle · Salesforce
 - Projetos envolvendo **modelagem e simulação**
 - Estudos e implementações de **algoritmos**
 - Repositórios educacionais e exploratórios
-  
+
+---
+
+## 📫 Contato
+
+- LinkedIn: *https://www.linkedin.com/in/cassianorcarneiro*
+- Email: *cassianorcarneiro@outlook.com*
+- Hugging Face: *https://huggingface.co/cassianorcarneiro*
