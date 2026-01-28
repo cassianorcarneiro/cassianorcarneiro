@@ -57,5 +57,4 @@ React · HTML · CSS · Azure · Oracle · Salesforce
 ## 📫 Contato
 
 - LinkedIn: *https://www.linkedin.com/in/cassianorcarneiro*
-- Email: *cassianorcarneiro@outlook.com*
 - Hugging Face: *https://huggingface.co/cassianorcarneiro*
