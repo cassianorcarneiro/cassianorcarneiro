@@ -7,18 +7,6 @@
   <img src="https://img.shields.io/github/followers/cassianorcarneiro?style=for-the-badge&color=yellow" alt="GitHub Followers"/>
 </p>
 
-<p align="center">
-  <a href="https://www.linkedin.com/in/cassianorcarneiro/" target="_blank">
-    <img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
-  </a> 
-  <a href="mailto:cassianorcarneiro@outlook.com">
-    <img src="https://img.shields.io/badge/-Email-%23D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
-  </a>
-  <a href="http://lattes.cnpq.br/8010150917560791" target="_blank">
-    <img src="https://img.shields.io/badge/-Currículo_Lattes-%23005a9c?style=for-the-badge&logo=cnpq&logoColor=white" alt="Lattes">
-  </a>
-</p>
-
 ---
 
 ## 🧠 Sobre mim
