@@ -1,4 +1,4 @@
-# 👋 Olá, eu sou o Cassiano Carneiro
+# 👋 Olá, eu sou o Cassiano!
 
 ### ⚡ Engenheiro Eletricista (M.Sc.) | Programador | Pesquisador em Machine Learning e Data Science
 
