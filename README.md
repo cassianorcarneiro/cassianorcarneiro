@@ -1,6 +1,6 @@
 # 👋 Olá, eu sou o Cassiano!
 
-### ⚡ Engenheiro Eletricista (M.Sc.) | Programador | Pesquisador em Machine Learning e Data Science
+### ⚡ Engenheiro Eletricista (MSc) | Programador | Pesquisador em Machine Learning e Data Science
 
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=cassianorcarneiro&style=for-the-badge&color=blue" alt="Profile Views"/>
@@ -65,5 +65,4 @@ Tenho interesse especial em problemas onde **estrutura, dados e incerteza** se e
 
 - Experimentos em **machine learning e data science**
 - Projetos envolvendo **modelagem e simulação**
-- Estudos e implementações de **algoritmos**
-- Repositórios educacionais e exploratórios
+- Implementações de **algoritmos** de utilidade no dia a dia
