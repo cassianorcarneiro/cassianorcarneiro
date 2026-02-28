@@ -53,14 +53,6 @@ Tenho interesse especial em problemas onde **estrutura, dados e incerteza** se e
 
 ---
 
-## 📊 Estatísticas do GitHub
-
-<p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=cassianorcarneiro&theme=transparent&hide_border=true&title_color=blue" alt="GitHub Streak" />
-</p>
-
----
-
 ## 📌 O que você encontra aqui
 
 - Experimentos em **machine learning e data science**
