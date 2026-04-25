@@ -53,7 +53,7 @@ Tenho interesse especial em problemas onde **estrutura, dados e incerteza** se e
 
 ### Plataformas & Web
 <p>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/Azure-%230072C6.svg?style=flat-square&logo=microsoftazure&logoColor=white" alt="Azure">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/AWS-%23232F3E.svg?style=flat-square&logo=amazon-aws&logoColor=white" alt="AWS">
   <img src="https://img.shields.io/badge/Oracle-%23F00000.svg?style=flat-square&logo=oracle&logoColor=white" alt="Oracle">
   <img src="https://img.shields.io/badge/Salesforce-%2300A1E0.svg?style=flat-square&logo=salesforce&logoColor=white" alt="Salesforce">
   <img src="https://img.shields.io/badge/React-%2320232a.svg?style=flat-square&logo=react&logoColor=%2361DAFB" alt="React">
