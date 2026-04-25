@@ -1,5 +1,7 @@
 <h1 align="center">👋 Olá, eu sou o Cassiano</h1>
 
+<br>
+
 <p align="center">
   <em>Engenheiro Eletricista (MSc) · Programador · Pesquisador em Machine Learning</em>
 </p>
@@ -10,7 +12,7 @@
   <img src="https://img.shields.io/badge/Status-Open%20to%20Collaborate-success?style=for-the-badge" alt="Open to Collaborate"/>
 </p>
 
----
+<br>
 
 ## 🧠 Sobre mim
 
@@ -22,59 +24,59 @@ Sou **mestre em Engenharia Elétrica (UFJF/USP)** com foco em **modelagem matem�
 
 Tenho interesse especial em problemas onde **estrutura, dados e incerteza** se encontram — onde modelos matemáticos precisam dialogar com dados ruidosos do mundo real.
 
----
+<br>
 
 ## 🛠️ Stack
 
-<table border="0" cellspacing="0" cellpadding="10">
-<tr>
-<td valign="top" align="center" width="33%">
+<div align="left">
 
 ### Linguagens
-![Python](https://img.shields.io/badge/Python-3670A0?style=flat-square&logo=python&logoColor=ffdd54)
-![C++](https://img.shields.io/badge/C++-%2300599C.svg?style=flat-square&logo=c%2B%2B&logoColor=white)
-![R](https://img.shields.io/badge/R-%23276DC3.svg?style=flat-square&logo=r&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-%23323330.svg?style=flat-square&logo=javascript&logoColor=%23F7DF1E)
-
-</td>
-<td valign="top" align="center" width="33%">
+<p>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/Python-3670A0?style=flat-square&logo=python&logoColor=ffdd54" alt="Python">
+  <img src="https://img.shields.io/badge/C++-%2300599C.svg?style=flat-square&logo=c%2B%2B&logoColor=white" alt="C++">
+  <img src="https://img.shields.io/badge/R-%23276DC3.svg?style=flat-square&logo=r&logoColor=white" alt="R">
+  <img src="https://img.shields.io/badge/JavaScript-%23323330.svg?style=flat-square&logo=javascript&logoColor=%23F7DF1E" alt="JavaScript">
+</p>
 
 ### ML & Data Science
-![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=flat-square&logo=PyTorch&logoColor=white)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=flat-square&logo=TensorFlow&logoColor=white)
-![Hugging Face](https://img.shields.io/badge/🤗%20Hugging%20Face-F9AB00?style=flat-square)
-![Pandas](https://img.shields.io/badge/Pandas-%23150458.svg?style=flat-square&logo=pandas&logoColor=white)
-![NumPy](https://img.shields.io/badge/NumPy-%23013243.svg?style=flat-square&logo=numpy&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=flat-square&logo=scikit-learn&logoColor=white)
-![LangGraph](https://img.shields.io/badge/LangGraph-1C3C3C?style=flat-square&logo=langchain&logoColor=white)
-![Ollama](https://img.shields.io/badge/Ollama-000000?style=flat-square&logo=ollama&logoColor=white)
-
-</td>
-<td valign="top" align="center" width="33%">
+<p>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=flat-square&logo=PyTorch&logoColor=white" alt="PyTorch">
+  <img src="https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=flat-square&logo=TensorFlow&logoColor=white" alt="TensorFlow">
+  <img src="https://img.shields.io/badge/🤗%20Hugging%20Face-F9AB00?style=flat-square" alt="Hugging Face">
+  <img src="https://img.shields.io/badge/Pandas-%23150458.svg?style=flat-square&logo=pandas&logoColor=white" alt="Pandas">
+  <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/NumPy-%23013243.svg?style=flat-square&logo=numpy&logoColor=white" alt="NumPy">
+  <img src="https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=flat-square&logo=scikit-learn&logoColor=white" alt="scikit-learn">
+  <img src="https://img.shields.io/badge/LangGraph-1C3C3C?style=flat-square&logo=langchain&logoColor=white" alt="LangGraph">
+  <img src="https://img.shields.io/badge/Ollama-000000?style=flat-square&logo=ollama&logoColor=white" alt="Ollama">
+</p>
 
 ### Plataformas & Web
-![Azure](https://img.shields.io/badge/Azure-%230072C6.svg?style=flat-square&logo=microsoftazure&logoColor=white)
-![Oracle](https://img.shields.io/badge/Oracle-%23F00000.svg?style=flat-square&logo=oracle&logoColor=white)
-![Salesforce](https://img.shields.io/badge/Salesforce-%2300A1E0.svg?style=flat-square&logo=salesforce&logoColor=white)
-![React](https://img.shields.io/badge/React-%2320232a.svg?style=flat-square&logo=react&logoColor=%2361DAFB)
-![HTML5](https://img.shields.io/badge/HTML5-%23E34F26.svg?style=flat-square&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-%231572B6.svg?style=flat-square&logo=css3&logoColor=white)
-![Git](https://img.shields.io/badge/Git-%23F05033.svg?style=flat-square&logo=git&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-%230db7ed.svg?style=flat-square&logo=docker&logoColor=white)
+<p>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/Azure-%230072C6.svg?style=flat-square&logo=microsoftazure&logoColor=white" alt="Azure">
+  <img src="https://img.shields.io/badge/Oracle-%23F00000.svg?style=flat-square&logo=oracle&logoColor=white" alt="Oracle">
+  <img src="https://img.shields.io/badge/Salesforce-%2300A1E0.svg?style=flat-square&logo=salesforce&logoColor=white" alt="Salesforce">
+  <img src="https://img.shields.io/badge/React-%2320232a.svg?style=flat-square&logo=react&logoColor=%2361DAFB" alt="React">
+  <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/HTML5-%23E34F26.svg?style=flat-square&logo=html5&logoColor=white" alt="HTML5">
+  <img src="https://img.shields.io/badge/CSS3-%231572B6.svg?style=flat-square&logo=css3&logoColor=white" alt="CSS3">
+  <img src="https://img.shields.io/badge/Git-%23F05033.svg?style=flat-square&logo=git&logoColor=white" alt="Git">
+  <img src="https://img.shields.io/badge/Docker-%230db7ed.svg?style=flat-square&logo=docker&logoColor=white" alt="Docker">
+</p>
 
-</td>
-</tr>
-</table>
+</div>
 
----
+<br>
 
 ## 🚀 Projetos em destaque
 
 > 🔒 **[private-ai-agent](https://github.com/cassianorcarneiro/private-ai-agent)** — Sistema multi-agente com LLMs locais via Ollama. Privacidade-first, capaz de operar offline, com busca web opcional via DuckDuckGo.
 
-> 🐍 **[pyrefactor-agent](https://github.com/cassianorcarneiro/pyrefactor-agent)** — Refatorador Python multi-agente baseado em LLMs locais. Traduz, reorganiza e documenta código Python com validação AST automática.
+> 🐍 **[pyrefactor-agent](https://github.com/cassianorcarneiro/pyrefactor-age)** — Refatorador Python multi-agente baseado em LLMs locais. Traduz, reorganiza e documenta código Python com validação AST automática.
 
----
+> 📊 **[ai-powered-financial-dashboard](https://github.com/cassianorcarneiro/ai-powered-financial-dashboard)** — Dashboard de controle financeiro com persistência de dados local (CSV). Integração com LLMs locais via Ollama para geração de insights analíticos e processamento de dados offline.
+
+<br>
 
 ## 📌 O que você encontra aqui
 
@@ -83,6 +85,3 @@ Tenho interesse especial em problemas onde **estrutura, dados e incerteza** se e
 - 🤖 **Sistemas multi-agente** com LLMs locais e privacidade-first
 - 🛠️ **Algoritmos** úteis para problemas práticos do dia a dia
 - 📚 Implementações de papers e estudos da literatura técnica
-
----
-
