@@ -70,7 +70,7 @@ Tenho interesse especial em problemas onde **estrutura, dados e incerteza** se e
 
 ## 🚀 Projetos em destaque
 
-> 🔒 **[private-ai-agent](https://github.com/cassianorcarneiro/private-ai-agent)** — Sistema multi-agente com LLMs locais via Ollama. Privacidade-first, capaz de operar offline, com busca web opcional via DuckDuckGo.
+> 🔒 **[private-ai-agent](https://github.com/cassianorcarneiro/private-ai-agent)** — Sistema multi-agente com LLMs locais via Ollama. Privacy-first, capaz de operar offline, com busca web opcional via DuckDuckGo.
 
 > 🐍 **[pyrefactor-agent](https://github.com/cassianorcarneiro/pyrefactor-age)** — Refatorador Python multi-agente baseado em LLMs locais. Traduz, reorganiza e documenta código Python com validação AST automática.
 
