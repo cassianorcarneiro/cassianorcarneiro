@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320" role="img" aria-label="Cassiano — Electrical Engineer (MSc), Machine Learning Researcher">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1117"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="sig" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#818cf8"/>
+      <stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1b2230" stroke-width="1"/>
+    </pattern>
+    <style>
+      .name{font:700 64px -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;fill:#e6edf3}
+      .sub{font:400 22px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#8b949e}
+      .tag{font:400 16px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#22d3ee}
+      .tag2{font:400 17px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#6e7681}
+      .edge{stroke:#30363d;stroke-width:1}
+      .node{fill:#818cf8;animation:pulse 2.4s ease-in-out infinite}
+      .wave{fill:none;stroke:url(#sig);stroke-width:2.5;stroke-linecap:round;animation:draw 2.8s ease-out both}
+      .wave2{fill:none;stroke:url(#sig);stroke-width:1.5;opacity:.35;animation:draw 3.4s ease-out .4s both}
+      .fade{animation:fade 1s ease-out .5s both}
+      @keyframes draw{from{stroke-dasharray:1;stroke-dashoffset:1}to{stroke-dasharray:1;stroke-dashoffset:0}}
+      @keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+      @keyframes fade{from{opacity:0}to{opacity:1}}
+      @media (prefers-reduced-motion:reduce){.wave,.wave2,.fade,.node{animation:none}}
+    </style>
+  </defs>
+
+  <rect width="1200" height="320" fill="url(#bg)"/>
+  <rect width="1200" height="320" fill="url(#grid)"/>
+
+  <g class="fade">
+    <text x="64" y="64" class="tag">~/cassianorcarneiro</text>
+    <text x="64" y="134" class="name">Cassiano</text>
+    <text x="64" y="178" class="sub">Electrical Engineer (MSc) · ML Researcher · Systems</text>
+    <text x="64" y="214" class="tag2">structure · data · uncertainty</text>
+  </g>
+
+  <g>
+    <line class="edge" x1="900" y1="80" x2="1000" y2="60"/>
+    <line class="edge" x1="900" y1="80" x2="1000" y2="105"/>
+    <line class="edge" x1="900" y1="80" x2="1000" y2="150"/>
+    <line class="edge" x1="900" y1="80" x2="1000" y2="195"/>
+    <line class="edge" x1="900" y1="125" x2="1000" y2="60"/>
+    <line class="edge" x1="900" y1="125" x2="1000" y2="105"/>
+    <line class="edge" x1="900" y1="125" x2="1000" y2="150"/>
+    <line class="edge" x1="900" y1="125" x2="1000" y2="195"/>
+    <line class="edge" x1="900" y1="170" x2="1000" y2="60"/>
+    <line class="edge" x1="900" y1="170" x2="1000" y2="105"/>
+    <line class="edge" x1="900" y1="170" x2="1000" y2="150"/>
+    <line class="edge" x1="900" y1="170" x2="1000" y2="195"/>
+    <line class="edge" x1="1000" y1="60" x2="1100" y2="105"/>
+    <line class="edge" x1="1000" y1="60" x2="1100" y2="150"/>
+    <line class="edge" x1="1000" y1="105" x2="1100" y2="105"/>
+    <line class="edge" x1="1000" y1="105" x2="1100" y2="150"/>
+    <line class="edge" x1="1000" y1="150" x2="1100" y2="105"/>
+    <line class="edge" x1="1000" y1="150" x2="1100" y2="150"/>
+    <line class="edge" x1="1000" y1="195" x2="1100" y2="105"/>
+    <line class="edge" x1="1000" y1="195" x2="1100" y2="150"/>
+  </g>
+  <g>
+    <circle class="node" cx="900" cy="80" r="7"/>
+    <circle class="node" cx="900" cy="125" r="7" style="animation-delay:.3s"/>
+    <circle class="node" cx="900" cy="170" r="7" style="animation-delay:.6s"/>
+    <circle class="node" cx="1000" cy="60" r="7" style="animation-delay:.9s"/>
+    <circle class="node" cx="1000" cy="105" r="7" style="animation-delay:1.2s"/>
+    <circle class="node" cx="1000" cy="150" r="7" style="animation-delay:1.5s"/>
+    <circle class="node" cx="1000" cy="195" r="7" style="animation-delay:1.8s"/>
+    <circle class="node" cx="1100" cy="105" r="7" style="animation-delay:2.1s"/>
+    <circle class="node" cx="1100" cy="150" r="7" style="animation-delay:2.4s"/>
+  </g>
+
+  <path class="wave2" pathLength="1" d="M0 270 Q30 284 60 270 T120 270 T180 270 T240 270 T300 270 T360 270 T420 270 T480 270 T540 270 T600 270 T660 270 T720 270 T780 270 T840 270 T900 270 T960 270 T1020 270 T1080 270 T1140 270 T1200 270"/>
+  <path class="wave" pathLength="1" d="M0 270 Q37.5 248 75 270 T150 270 T225 270 T300 270 T375 270 T450 270 T525 270 T600 270 T675 270 T750 270 T825 270 T900 270 T975 270 T1050 270 T1125 270 T1200 270"/>
+</svg>
