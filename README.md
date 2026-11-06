@@ -1,18 +1,8 @@
 <h1 align="center">👋 Hi, I'm Cassiano</h1>
 
-<br>
-
 <p align="center">
   <em>Electrical Engineer (MSc) · Programmer · Machine Learning Researcher</em>
 </p>
-
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=cassianorcarneiro&style=for-the-badge&color=blue" alt="Profile Views"/>
-  <img src="https://img.shields.io/github/followers/cassianorcarneiro?style=for-the-badge&color=yellow" alt="GitHub Followers"/>
-  <img src="https://img.shields.io/badge/Status-Open%20to%20Collaborate-success?style=for-the-badge" alt="Open to Collaborate"/>
-</p>
-
-<br>
 
 ## 🧠 About Me
 
