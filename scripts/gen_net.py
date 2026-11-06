@@ -1,20 +1,41 @@
-"""Generate a rotating 3D neural network for the README header SVGs.
+"""
+Generate a rotating 3D neural network for the README header SVGs.
 
 Mechanism: rigid rotation about a fixed axis + orthographic camera.
 Each projected coordinate is c + a*cos(wt) + b*sin(wt) = c + A*cos(wt - phi).
 So every node/edge attribute is one SMIL <animate> with the same cosine
 waveform (cubic keySplines), shifted by a negative `begin` = phase.
-"""
-import math, re, sys, random
 
-T = 18.0                       # seconds per revolution
-BOX = (830, 34, 1165, 232)     # x0, y0, x1, y1 on the 1200x320 canvas
-LAYERS = [(6, 0.42), (10, 0.70), (14, 0.86), (10, 0.70), (6, 0.42)]  # (nodes, ring radius)
-K = 3                          # edges per node into the next layer
-YAW, PITCH = math.radians(32), math.radians(14)   # camera orientation
-AXIS_TILT = math.radians(5)    # rotation axis slightly off the layer axis
+Usage:
+    python3 scripts/gen_net.py            # uses ../assets relative to this file
+    python3 scripts/gen_net.py <dir>      # dir containing header-dark/light.svg
+"""
+
+# Imports
+
+import math, re, sys, random
+from pathlib import Path
+
+# Parameters
+
+T = 20.0                                                                # seconds per revolution
+BOX = (830, 34, 1165, 232)                                              # x0, y0, x1, y1 on the 1200x320 canvas
+LAYERS = [(6, 0.42), (10, 0.70), (14, 0.86), (10, 0.70), (6, 0.42)]     # (nodes, ring radius)
+K = 7                                                                   # edges per node into the next layer
+YAW, PITCH = math.radians(64), math.radians(14)                         # camera orientation
+AXIS_TILT = math.radians(7)                                             # rotation axis slightly off the layer axis
+
+# Default: the repo's assets/ folder, resolved from this file's location,
+# so the script works regardless of the current working directory.
+
+ASSETS = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().parent.parent / "assets"
+for _n in ("dark", "light"):
+    if not (ASSETS / f"header-{_n}.svg").is_file():
+        sys.exit(f"error: {ASSETS / f'header-{_n}.svg'} not found. "
+                 f"Pass the folder that contains the SVGs: python3 gen_net.py <dir>")
 
 # Bezier approximation of one quarter of cos(): handles at 1/3, end slope pi/2.
+
 EI = "0.333 0 0.667 0.476"     # 1 -> 0 (accelerating)
 EO = "0.333 0.524 0.667 1"     # 0 -> -1 (decelerating)
 SPL = f"{EI};{EO};{EI};{EO}"
@@ -140,8 +161,15 @@ THEMES = {
 }
 
 for name, (pal, ec, eo) in THEMES.items():
-    path = f"{sys.argv[1]}/header-{name}.svg"
-    s = open(path).read()
+    path = ASSETS / f"header-{name}.svg"
+    # Explicit UTF-8: on Windows the default is cp1252, which writes "·" as the
+    # single byte 0xB7 and produces invalid UTF-8 (XML parse error).
+    # errors="replace" lets the script repair files corrupted by older versions:
+    # the bad byte lives only inside the net block, which is regenerated below.
+    s = path.read_bytes().decode("utf-8", errors="replace")
+    # Git on Windows (core.autocrlf=true) checks files out with CRLF. The regexes
+    # below match "\n", so normalize first. SVG/XML accepts LF everywhere.
+    s = s.replace("\r\n", "\n")
     # Drop the old 2D network: CSS for .edge/.node and the two <g> blocks.
     s = re.sub(r"\s*\.edge\{[^}]*\}", "", s)
     s = re.sub(r"\s*\.node\{[^}]*\}", "", s)
@@ -150,9 +178,12 @@ for name, (pal, ec, eo) in THEMES.items():
     s = re.sub(r"\n  <g>\n    <line class=\"edge\".*?</g>\n  <g>\n    <circle class=\"node\".*?</g>\n",
                "\n<!--NET-->\n", s, flags=re.S)
     s = re.sub(r"\n  <!-- net:start.*?<!-- net:end -->\n", "\n<!--NET-->\n", s, flags=re.S)
-    net = (f"  <!-- net:start · 3D network, rotation {T:g}s, {len(nodes)} nodes, {len(edges)} edges -->\n"
+    net = (f"  <!-- net:start - 3D network, rotation {T:g}s, {len(nodes)} nodes, {len(edges)} edges -->\n"
            + build(pal, ec, eo) + "\n  <!-- net:end -->")
     assert "<!--NET-->" in s, path
     s = s.replace("<!--NET-->", net)
-    open(path, "w").write(s)
+    if "�" in s:
+        sys.exit(f"error: {path} has invalid UTF-8 outside the network block. "
+                 f"Restore the original SVG and run again.")
+    path.write_bytes(s.encode("utf-8"))   # bytes: no locale encoding, no \r\n translation
     print(path, len(nodes), "nodes", len(edges), "edges", len(s) // 1024, "KB")
