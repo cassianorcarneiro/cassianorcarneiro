@@ -1,22 +1,19 @@
-"""Generate a rotating 3D neural network that folds, crosses and flips like a cone.
+"""Generate a rotating 3D neural network that folds and crosses like a cone.
 
 Model
     Layers are rings of nodes in the Y-Z plane, stacked along the X axis.
     Ring radii grow in sequence: layer 0 is the smallest (apex), the last layer
-    is the largest (base). Colours follow the layer, not the size.
+    is the largest (base). Radii are constant.
 
-    One cycle (CYCLE = 4 * STEP_T seconds) is four moves, one starting every STEP_T:
-      1. FLIP   radii morph: big rings shrink, small rings grow, until the order
-                is reversed. Halfway, all rings have the same radius (a cylinder).
-      2. PASS   apex-to-base distance L goes from +SWING to -SWING. Rings cross
-                THROUGH each other; at L = 0 the cone is flat (concentric rings).
-      3. FLIP   same morph, back to the original radii.
+    The apex-to-base distance L oscillates between +SWING and -SWING. One cycle
+    (CYCLE = 2 * (HOLD_T + PASS_T) seconds) has four parts:
+      1. HOLD   rest with the cone fully open (L = +SWING), for HOLD_T.
+      2. PASS   L goes from +SWING to -SWING in PASS_T. Rings cross THROUGH each
+                other; at L = 0 the cone is flat (concentric rings).
+      3. HOLD   rest with the cone inverted (L = -SWING), for HOLD_T.
       4. PASS   L goes from -SWING to +SWING.
-    A FLIP lasts FLIP_T and a PASS lasts PASS_T. Each uses a half-cosine ease
-    (zero speed at both ends). If a move lasts longer than STEP_T, the next one
-    starts while it is still slowing down, so the net never stops between moves.
-    Overlap at a joint = duration of the move that ends there - STEP_T.
-    With a duration equal to STEP_T the moves chain with a pause between.
+    A PASS uses a half-cosine ease (zero speed at both ends). With HOLD_T = 0 the
+    passes chain into a pure sinusoid, L = SWING * cos(pi * t / PASS_T).
 
     Ring l sits at a linear position between apex and base, around a pivot:
         x_l = L * (PIVOT - l / (n-1))
@@ -27,7 +24,7 @@ Model
     through an orthographic camera.
 
 Why sampling
-    Rotation, axial motion and radius morphing have different timings, so a
+    Rotation and axial motion have different timings, so a
     projected coordinate is not a single cosine. The script simulates N frames
     over one revolution and writes each attribute as ONE <animate values="...">.
     CYCLE must divide T so the loop closes exactly.
@@ -47,32 +44,30 @@ for _n in ("dark", "light"):
         sys.exit(f"error: {ASSETS / f'header-{_n}.svg'} not found. "
                  f"Pass the folder that contains the SVGs: python3 gen_net.py <dir>")
 
-T = 18.0                       # seconds per revolution
-BOX = (830, 34, 1165, 232)     # x0, y0, x1, y1 on the 1200x320 canvas
-# (nodes, ring radius), apex -> base. Equal node counts: after the flip the
-# smallest ring must not be crowded. Radii are linear, so mid-flip is a cylinder.
+REDUCTION = 2.0
+
+
+BOX = (750, 28, 1162, 234)     # x0, y0, x1, y1 on the 1200x320 canvas
+# (nodes, ring radius), apex -> base.
 LAYERS = [(9, 0.30), (9, 0.52), (9, 0.74), (9, 0.96), (9, 1.18)]
 K = 5                          # edges per node into the next ring
 YAW, PITCH = math.radians(16), math.radians(14)   # camera orientation
 AXIS_TILT = math.radians(5)    # rotation axis slightly off the cone axis
 
-SWING = 2.2                    # apex-to-base distance when the cone is fully open
-PIVOT = 0.5                    # 0 = apex fixed, 1 = base fixed, 0.5 = apex and base move oppositely
-STEP_T = 4.5                   # s between the starts of consecutive moves
-FLIP_T = 6.0                   # s the size inversion lasts
-PASS_T = 6.0                   # s the rings take to cross each other
-                               # Each must be in [STEP_T, 2*STEP_T]. Overlap at a joint =
-                               # duration of the move that ends there - STEP_T.
-                               # FLIP_T -> PASS_T joint overlaps FLIP_T - STEP_T;
-                               # PASS_T -> FLIP_T joint overlaps PASS_T - STEP_T.
-CYCLE = 4 * STEP_T             # s for the full sequence. Must divide T (18 s).
-                               # STEP_T in {4.5, 2.25, 1.5, ...}
-RING_OUTLINE = False           # True draws each ring as a thin ellipse through its nodes
-N = 96                        # frames per revolution (linear interpolation)
+PIVOT = 0.5                     # 0 = apex fixed, 1 = base fixed, 0.5 = apex and base move oppositely
 
-assert abs(T / CYCLE - round(T / CYCLE)) < 1e-9, "CYCLE = 4*STEP_T must divide T"
-for _name, _d in (("FLIP_T", FLIP_T), ("PASS_T", PASS_T)):
-    assert STEP_T <= _d <= 2 * STEP_T, f"{_name} must be between STEP_T and 2*STEP_T"
+T = 18.0 / REDUCTION            # seconds per revolution
+SWING = 4.5                     # apex-to-base distance when the cone is fully open.
+                                # The net is as tall as BOX allows (ring diameter), so this sets its width:
+                                # larger = longer cone. The script prints how much of BOX is used.
+PASS_T = 9.0 / REDUCTION        # s the rings take to cross each other
+HOLD_T = 0.0 / REDUCTION        # s of rest at each extreme. 0 = continuous motion
+CYCLE = 2 * (HOLD_T + PASS_T)   # s for the full sequence. Must divide T.
+RING_OUTLINE = False            # True draws each ring as a thin ellipse through its nodes
+N = 96                          # frames per revolution (linear interpolation)
+
+assert PASS_T > 0 and HOLD_T >= 0, "PASS_T must be > 0 and HOLD_T >= 0"
+assert abs(T / CYCLE - round(T / CYCLE)) < 1e-9, "CYCLE = 2*(HOLD_T+PASS_T) must divide T"
 
 random.seed(7)
 
@@ -126,26 +121,20 @@ def view(p, ang):
     q = [par[d] + (p[d] - par[d]) * c + w[d] * s for d in range(3)]
     return (dot(q, right), -dot(q, up), dot(q, fwd))
 
-def ease(x):                           # half-cosine: 0 -> 1, zero slope at both ends
-    return (1 - math.cos(math.pi * x)) / 2
-
-def clamp01(x): return 0.0 if x < 0 else 1.0 if x > 1 else x
-
 def pose(t):
-    """(L, s) at time t. L = signed apex-to-base distance; s = radius mix, 0 = original
-    radii, 1 = reversed radii.
-
-    s = flip up (starts at 0) - flip down (starts at 2*STEP_T)
-    q = cross 1 (starts at STEP_T) - cross 2 (starts at 3*STEP_T), L = SWING * (1 - 2q)
-    The last move (cross 2) can outlast its cycle, so the neighbouring cycles
-    k = -1, 0, +1 are summed. Completed moves cancel in pairs."""
-    t += PASS_T - STEP_T               # t = 0 falls where cross 2 ends: cone fully open
-    s = q = 0.0
-    for k in (-1, 0, 1):
-        b = t - k * CYCLE
-        s += ease(clamp01(b / FLIP_T)) - ease(clamp01((b - 2 * STEP_T) / FLIP_T))
-        q += ease(clamp01((b - STEP_T) / PASS_T)) - ease(clamp01((b - 3 * STEP_T) / PASS_T))
-    return SWING * (1 - 2 * q), s
+    """Signed apex-to-base distance L at time t. t = 0 starts the rest with the cone open.
+    SWING * cos(pi * x) is a half-cosine ease from +SWING to -SWING as x goes 0 -> 1."""
+    c = t % CYCLE
+    if c < HOLD_T:                     # 1. rest, cone open
+        return SWING
+    c -= HOLD_T
+    if c < PASS_T:                     # 2. cross: +SWING -> -SWING
+        return SWING * math.cos(math.pi * c / PASS_T)
+    c -= PASS_T
+    if c < HOLD_T:                     # 3. rest, cone inverted
+        return -SWING
+    c -= HOLD_T                        # 4. cross: -SWING -> +SWING
+    return -SWING * math.cos(math.pi * c / PASS_T)
 
 # Simulate one revolution. Frame N is frame 0, so the loop closes exactly.
 # A node is  C + cos(theta) * A + sin(theta) * B,  and `view` is linear, so each
@@ -154,11 +143,11 @@ frames, rings = [], []                 # frames[k][i] = (x, y, z);  rings[k][l] 
 for k in range(N + 1):
     t = T * (k % N) / N
     ang = 2 * math.pi * t / T
-    L, s = pose(t)                     # frame 0 = cone fully open, original radii
+    L = pose(t)                        # frame 0 = cone fully open
     rk = []
     for li in range(n_l):
         xl = L * (PIVOT - li / (n_l - 1))
-        r = (1 - s) * RADII[li] + s * RADII[n_l - 1 - li]
+        r = RADII[li]
         rk.append((view([xl, 0, 0], ang), view([0, r, 0], ang), view([0, 0, r], ang)))
     rings.append(rk)
     frames.append([tuple(rk[layer_of[i]][0][d]
@@ -179,6 +168,11 @@ S = min((BOX[2] - BOX[0]) / (max(allx) - min(allx)), (BOX[3] - BOX[1]) / (max(al
 ox = (BOX[0] + BOX[2]) / 2 - S * (max(allx) + min(allx)) / 2
 oy = (BOX[1] + BOX[3]) / 2 - S * (max(ally) + min(ally)) / 2
 zmin, zmax = min(allz), max(allz)
+_w, _h = S * (max(allx) - min(allx)), S * (max(ally) - min(ally))
+_bw, _bh = BOX[2] - BOX[0], BOX[3] - BOX[1]
+print(f"fit: net {_w:.0f}x{_h:.0f} px in a {_bw}x{_bh} box "
+      f"({'height' if _h * _bw > _w * _bh else 'width'} is the limit; "
+      f"raise SWING to widen the net, lower it to narrow)")
 
 def track(attr, vals, nd):
     """Static value from frame 0, plus one <animate> if the value ever changes."""
