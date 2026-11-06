@@ -21,11 +21,11 @@ That means mathematical models that must survive contact with noisy, real-world 
 
 ### `02 · featured work`
 
-| | Project | What it does | Core idea |
-|:-:|---|---|---|
-| ◆ | **[private-llm-chat](https://github.com/cassianorcarneiro/private-llm-chat)** | Self-hosted chat portal for local LLMs on a single-GPU home server. Opt-in web search with cited answers. Persistent history. | LangGraph pipeline: SearXNG fetch, rerank, cite. Rolling summaries bound context growth. FastAPI + React in one Docker Compose stack. |
-| ◆ | **[sunside-route-analyzer](https://github.com/cassianorcarneiro/sunside-route-analyzer)** | Tells which side of the vehicle (left/right) gets less direct sunlight along a driving route, for given departure and arrival times. | Segment-by-segment comparison of solar position against vehicle heading at each segment's timestamp. |
-| ◆ | **[ai-powered-financial-dashboard](https://github.com/cassianorcarneiro/ai-powered-financial-dashboard)** | Personal finance dashboard with local CSV persistence. | Local LLM generates analytical insights, fully offline. |
+| Project | What it does | Core idea |
+|---|---|---|
+| **[private-llm-chat](https://github.com/cassianorcarneiro/private-llm-chat)** | Self-hosted chat portal for local LLMs on a single-GPU home server. Opt-in web search with cited answers. Persistent history. | LangGraph pipeline: SearXNG fetch, rerank, cite. Rolling summaries bound context growth. FastAPI + React in one Docker Compose stack. |
+| **[sunside-route-analyzer](https://github.com/cassianorcarneiro/sunside-route-analyzer)** | Tells which side of the vehicle (left/right) gets less direct sunlight along a driving route, for given departure and arrival times. | Segment-by-segment comparison of solar position against vehicle heading at each segment's timestamp. |
+| **[ai-powered-financial-dashboard](https://github.com/cassianorcarneiro/ai-powered-financial-dashboard)** | Personal finance dashboard with local CSV persistence. | Local LLM generates analytical insights, fully offline. |
 
 <br>
 
