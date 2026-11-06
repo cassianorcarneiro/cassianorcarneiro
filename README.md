@@ -8,17 +8,14 @@
 
 ### `01 · about`
 
-Electrical Engineer with an **MSc from UFJF/USP**.
+Electrical Engineer. **BSc from UFJF**, **MSc from USP**.
 I work on **mathematical modeling, machine learning and complex computational systems**.
 My focus is problems where **structure, data and uncertainty** meet.
 That means mathematical models that must survive contact with noisy, real-world data.
 
-```mermaid
-flowchart LR
-    T["<b>Theory</b><br/>statistics · optimization<br/>linear algebra"] --> M(("models"))
-    D["<b>Data</b><br/>noisy · real-world<br/>uncertain"] --> M
-    M --> S["<b>Systems</b><br/>pipelines · agents<br/>production"]
-```
+- `theory` · statistics, optimization and linear algebra applied to real problems
+- `implementation` · software, data pipelines and ML models in production
+- `systems` · bridging electronics, computing and AI
 
 <br>
 
@@ -34,15 +31,15 @@ flowchart LR
 
 ### `03 · stack`
 
-| Layer | Tools |
-|---|---|
-| **Languages** | <img src="https://img.shields.io/badge/Python-3670A0?style=flat-square&logo=python&logoColor=ffdd54" alt="Python"> <img src="https://img.shields.io/badge/C++-00599C?style=flat-square&logo=c%2B%2B&logoColor=white" alt="C++"> <img src="https://img.shields.io/badge/R-276DC3?style=flat-square&logo=r&logoColor=white" alt="R"> <img src="https://img.shields.io/badge/JavaScript-323330?style=flat-square&logo=javascript&logoColor=F7DF1E" alt="JavaScript"> |
-| **Modeling** | <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch"> <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=flat-square&logo=tensorflow&logoColor=white" alt="TensorFlow"> <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white" alt="scikit-learn"> |
-| **LLM systems** | <img src="https://img.shields.io/badge/Ollama-000000?style=flat-square&logo=ollama&logoColor=white" alt="Ollama"> <img src="https://img.shields.io/badge/LangGraph-1C3C3C?style=flat-square&logo=langchain&logoColor=white" alt="LangGraph"> <img src="https://img.shields.io/badge/Hugging%20Face-F9AB00?style=flat-square&logo=huggingface&logoColor=white" alt="Hugging Face"> |
-| **Data** | <img src="https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white" alt="Pandas"> <img src="https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white" alt="NumPy"> |
-| **Infra** | <img src="https://img.shields.io/badge/Docker-0db7ed?style=flat-square&logo=docker&logoColor=white" alt="Docker"> <img src="https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazonwebservices&logoColor=white" alt="AWS"> <img src="https://img.shields.io/badge/Git-F05033?style=flat-square&logo=git&logoColor=white" alt="Git"> |
-| **Web** | <img src="https://img.shields.io/badge/React-20232a?style=flat-square&logo=react&logoColor=61DAFB" alt="React"> <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white" alt="HTML5"> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white" alt="CSS3"> |
-| **Enterprise** | <img src="https://img.shields.io/badge/Salesforce-00A1E0?style=flat-square&logo=salesforce&logoColor=white" alt="Salesforce"> <img src="https://img.shields.io/badge/Oracle-F00000?style=flat-square&logo=oracle&logoColor=white" alt="Oracle"> |
+| Layer | Tools | Used for |
+|---|---|---|
+| **Languages** | <img src="https://img.shields.io/badge/Python-3670A0?style=flat-square&logo=python&logoColor=ffdd54" alt="Python"> <img src="https://img.shields.io/badge/C++-00599C?style=flat-square&logo=cplusplus&logoColor=white" alt="C++"> <img src="https://img.shields.io/badge/R-276DC3?style=flat-square&logo=r&logoColor=white" alt="R"> <img src="https://img.shields.io/badge/JavaScript-323330?style=flat-square&logo=javascript&logoColor=F7DF1E" alt="JavaScript"> | Python for ML and research code. C++ for performance-critical code. R for statistics. |
+| **Modeling** | <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch"> <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=flat-square&logo=tensorflow&logoColor=white" alt="TensorFlow"> <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white" alt="scikit-learn"> | Model training, evaluation and research experiments. |
+| **LLM systems** | <img src="https://img.shields.io/badge/Ollama-000000?style=flat-square&logo=ollama&logoColor=white" alt="Ollama"> <img src="https://img.shields.io/badge/LangGraph-1C3C3C?style=flat-square&logo=langchain&logoColor=white" alt="LangGraph"> <img src="https://img.shields.io/badge/Hugging%20Face-F9AB00?style=flat-square&logo=huggingface&logoColor=white" alt="Hugging Face"> | Local multi-agent systems and offline inference. |
+| **Data** | <img src="https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white" alt="Pandas"> <img src="https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white" alt="NumPy"> | Pipelines and analysis on noisy, real-world data. |
+| **Infra** | <img src="https://img.shields.io/badge/Docker-0db7ed?style=flat-square&logo=docker&logoColor=white" alt="Docker"> <img src="https://img.shields.io/badge/AWS-232F3E?style=flat-square" alt="AWS"> <img src="https://img.shields.io/badge/Git-F05033?style=flat-square&logo=git&logoColor=white" alt="Git"> | Containerized deployment and cloud services. |
+| **Web** | <img src="https://img.shields.io/badge/React-20232a?style=flat-square&logo=react&logoColor=61DAFB" alt="React"> <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white" alt="HTML5"> <img src="https://img.shields.io/badge/CSS-1572B6?style=flat-square&logo=css&logoColor=white" alt="CSS"> | Dashboards and interfaces for ML tools. |
+| **Enterprise** | <img src="https://img.shields.io/badge/Salesforce-00A1E0?style=flat-square" alt="Salesforce"> <img src="https://img.shields.io/badge/Oracle-F00000?style=flat-square" alt="Oracle"> | CRM and systems integration consulting. |
 
 <br>
 
