@@ -68,7 +68,7 @@ PASS_T = 6.0                   # s the rings take to cross each other
 CYCLE = 4 * STEP_T             # s for the full sequence. Must divide T (18 s).
                                # STEP_T in {4.5, 2.25, 1.5, ...}
 RING_OUTLINE = False           # True draws each ring as a thin ellipse through its nodes
-N = 200                        # frames per revolution (linear interpolation)
+N = 96                        # frames per revolution (linear interpolation)
 
 assert abs(T / CYCLE - round(T / CYCLE)) < 1e-9, "CYCLE = 4*STEP_T must divide T"
 for _name, _d in (("FLIP_T", FLIP_T), ("PASS_T", PASS_T)):
