@@ -52,5 +52,3 @@ That means mathematical models that must survive contact with noisy, real-world 
 - `papers` · implementations of papers from the technical literature
 
 <br>
-
-<p align="center"><sub><code>signal → model → system</code></sub></p>
