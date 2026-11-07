@@ -1,7 +1,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./assets/header-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="./assets/header-light.svg">
-  <img alt="Cassiano — Electrical Engineer (MSc) · ML Researcher · Systems" src="./assets/header-dark.svg" width="100%">
+  <img alt="Cassiano — Electrical Engineer (MSc) · Developer · ML Researcher" src="./assets/header-dark.svg" width="100%">
 </picture>
 
 <br>

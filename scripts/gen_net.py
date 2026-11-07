@@ -1,4 +1,5 @@
-"""Generate a rotating 3D neural network that folds and crosses like a cone.
+"""
+Generate a rotating 3D neural network that folds and crosses like a cone.
 
 Model
     Layers are rings of nodes in the Y-Z plane, stacked along the X axis.
@@ -35,36 +36,69 @@ Canvas
     bottom, both through a transform attribute. It stops with an error if the SVG
     header does not have the expected layout. Re-running is safe.
 
+Text
+    The header strings are the HEADER_* constants below. The script writes them
+    into the four <text> lines and the aria-label of both SVGs, XML-escaped.
+    Position and font stay in the SVG (x, y and the .tag/.name/.sub/.tag2 CSS).
+    The script warns if a line is long enough to reach the net.
+
 Usage:
     python3 scripts/gen_net.py            # uses ../assets relative to this file
     python3 scripts/gen_net.py <dir>      # dir containing header-dark/light.svg
 """
+
+# Imports
+
 import math, re, sys, random
 from pathlib import Path
+from xml.sax.saxutils import escape
 
 # Default: the repo's assets/ folder, resolved from this file's location,
 # so the script works regardless of the current working directory.
+
 ASSETS = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().parent.parent / "assets"
+
 for _n in ("dark", "light"):
     if not (ASSETS / f"header-{_n}.svg").is_file():
         sys.exit(f"error: {ASSETS / f'header-{_n}.svg'} not found. "
                  f"Pass the folder that contains the SVGs: python3 gen_net.py <dir>")
 
-REDUCTION = 2.0
+# palette, edge colour, edge opacity, ring opacity
 
+THEMES = {
+    "dark":  (("#22d3ee", "#818cf8", "#f472b6"), "#8b949e", ".22", ".55"),
+    "light": (("#0891b2", "#6366f1", "#db2777"), "#8c959f", ".38", ".6"),
+}
 
-HEIGHT = 400                   # total image height in px. Text stays centred and the wave stays at
-                               # the bottom. The net's box grows with it (see BOX). If the net stops
-                               # filling the width, adjust SWING: the script prints how much BOX is used.
+# Total image height in px. Text stays centred and the wave stays at
+# the bottom. The net's box grows with it (see BOX). If the net stops
+# filling the width, adjust SWING: the script prints how much BOX is used.
+
+HEIGHT = 500                   
 assert HEIGHT >= 240, "HEIGHT too small for the net box"
-BOX = (750, 28, 1162, HEIGHT - 86)   # x0, y0, x1, y1 of the net on the 1200 x HEIGHT canvas
+
+# x0, y0, x1, y1 of the net on the 1200 x HEIGHT canvas
+
+BOX = (750, 28, 1162, HEIGHT - 86)
+
+# Header text, written into both SVGs. Plain text: the script escapes & < > and quotes.
+
+HEADER_TOP = "~/cassianorcarneiro"                                              # small cyan line above the name
+HEADER_NAME = "Cassiano"                                                        # large title
+HEADER_SUB = "Electrical Engineer (MSc) · Dev · ML Researcher"            # monospace subtitle
+HEADER_TAG = ""                                                                 # small grey line at the bottom
+HEADER_ALT = "Cassiano — Electrical Engineer (MSc), Dev, ML Researcher"   # aria-label (screen readers)
+
 # (nodes, ring radius), apex -> base.
+
 LAYERS = [(9, 0.30), (9, 0.52), (9, 0.74), (9, 0.96), (9, 1.18)]
-K = 5                          # edges per node into the next ring
-YAW, PITCH = math.radians(16), math.radians(14)   # camera orientation
-AXIS_TILT = math.radians(5)    # rotation axis slightly off the cone axis
+K = 5                                                               # edges per node into the next ring
+YAW, PITCH = math.radians(16), math.radians(14)                     # camera orientation
+AXIS_TILT = math.radians(5)                                         # rotation axis slightly off the cone axis
 
 PIVOT = 0.5                     # 0 = apex fixed, 1 = base fixed, 0.5 = apex and base move oppositely
+
+REDUCTION = 2.0
 
 T = 18.0 / REDUCTION            # seconds per revolution
 SWING = 3.0                     # apex-to-base distance when the cone is fully open.
@@ -90,6 +124,7 @@ def cross(a, b):
 def dot(a, b): return sum(x * y for x, y in zip(a, b))
 
 # Nodes: ring l holds n_l nodes at angles theta (random start angle per ring).
+
 n_l = len(LAYERS)
 RADII = [r for _, r in LAYERS]
 theta, layer_of = [], []
@@ -105,26 +140,35 @@ def adist(a, b):
 
 # Connectivity by angular proximity, so strands stay radial in every pose:
 # each node -> its K angularly nearest nodes in the next ring.
+
 edges = set()
+
 for i in range(len(theta)):
     nxt = [j for j in range(len(theta)) if layer_of[j] == layer_of[i] + 1]
     nxt.sort(key=lambda j: adist(theta[i], theta[j]))
     for j in nxt[:K]: edges.add((i, j))
+
 for j in range(len(theta)):            # guarantee every node has an input
     if layer_of[j] == 0 or any(e[1] == j for e in edges): continue
     prev = [i for i in range(len(theta)) if layer_of[i] == layer_of[j] - 1]
     prev.sort(key=lambda i: adist(theta[i], theta[j]))
     edges.add((prev[0], j))
+
 edges = sorted(edges)
 
 # Rotation axis and camera basis. fwd points from the scene toward the camera,
 # so a LARGER dot(p, fwd) means NEARER to the camera.
+
 axis = norm([math.cos(AXIS_TILT), math.sin(AXIS_TILT), 0])
 fwd = norm([math.sin(YAW) * math.cos(PITCH), math.sin(PITCH), math.cos(YAW) * math.cos(PITCH)])
 right = norm(cross([0, 1, 0], fwd)); up = cross(fwd, right)
 
 def view(p, ang):
-    """Rotate p about `axis` by `ang` (Rodrigues), then project: (x, y_down, depth)."""
+
+    """
+    Rotate p about `axis` by `ang` (Rodrigues), then project: (x, y_down, depth).
+    """
+
     c, s = math.cos(ang), math.sin(ang)
     k = dot(p, axis); par = [k * a for a in axis]
     w = cross(axis, p)
@@ -132,8 +176,12 @@ def view(p, ang):
     return (dot(q, right), -dot(q, up), dot(q, fwd))
 
 def pose(t):
-    """Signed apex-to-base distance L at time t. t = 0 starts the rest with the cone open.
-    SWING * cos(pi * x) is a half-cosine ease from +SWING to -SWING as x goes 0 -> 1."""
+
+    """
+    Signed apex-to-base distance L at time t. t = 0 starts the rest with the cone open.
+    SWING * cos(pi * x) is a half-cosine ease from +SWING to -SWING as x goes 0 -> 1.
+    """
+
     c = t % CYCLE
     if c < HOLD_T:                     # 1. rest, cone open
         return SWING
@@ -149,7 +197,9 @@ def pose(t):
 # Simulate one revolution. Frame N is frame 0, so the loop closes exactly.
 # A node is  C + cos(theta) * A + sin(theta) * B,  and `view` is linear, so each
 # ring is described by three projected vectors: centre C, axes A and B.
+
 frames, rings = [], []                 # frames[k][i] = (x, y, z);  rings[k][l] = (C, A, B)
+
 for k in range(N + 1):
     t = T * (k % N) / N
     ang = 2 * math.pi * t / T
@@ -165,8 +215,8 @@ for k in range(N + 1):
                          + math.sin(theta[i]) * rk[layer_of[i]][2][d] for d in range(3))
                    for i in range(len(theta))])
 
-# Fit the whole animation envelope (rotation, motion, ring ellipses included)
-# into BOX.
+# Fit the whole animation envelope (rotation, motion, ring ellipses included) into BOX.
+
 allx = [p[0] for fr in frames for p in fr]
 ally = [p[1] for fr in frames for p in fr]
 for rk in rings:
@@ -199,7 +249,11 @@ def depth(i, far, near):               # far -> `far`, near -> `near`
 KAPPA = 0.5522847498            # cubic-Bezier constant for a quarter circle
 
 def ring_d(rk, li):
-    """Projected circle = affine image of a circle = ellipse; 4 cubic Beziers."""
+
+    """
+    Projected circle = affine image of a circle = ellipse; 4 cubic Beziers.
+    """
+
     C, A, B = rk[li]
     cx, cy = ox + S * C[0], oy + S * C[1]
     ax, ay, bx, by = S * A[0], S * A[1], S * B[0], S * B[1]
@@ -276,10 +330,35 @@ def fit_canvas(s, path):
                  f"found {n1}, {n2}, {n3}, {n4}, {n5}). Edit it by hand or restore the original.")
     return s
 
-THEMES = {   # palette, edge colour, edge opacity, ring opacity
-    "dark":  (("#22d3ee", "#818cf8", "#f472b6"), "#8b949e", ".22", ".55"),
-    "light": (("#0891b2", "#6366f1", "#db2777"), "#8c959f", ".38", ".6"),
-}
+def set_text(s, path):
+
+    """
+    Write the HEADER_* strings into the four <text> lines and the SVG aria-label.
+    Also warns when a line is probably long enough to reach the net.
+    """
+
+    lines = {"tag": HEADER_TOP, "name": HEADER_NAME, "sub": HEADER_SUB, "tag2": HEADER_TAG}
+    for cls, text in lines.items():
+        s, n = re.subn(r'(<text\b[^>]*\bclass="%s"[^>]*>)[^<]*(</text>)' % cls,
+                       lambda m: m.group(1) + escape(text) + m.group(2), s)
+        if n != 1:
+            sys.exit(f'error: {path} should have exactly one <text class="{cls}">, found {n}. '
+                     f"Edit it by hand or restore the original.")
+        # Rough width check: monospace ~0.6 em per character, the bold sans title ~0.58 em.
+        css = re.search(r'\.%s\{font:[^}]*\}' % cls, s)
+        size = re.search(r'(\d+(?:\.\d+)?)px', css.group(0)) if css else None
+        x = re.search(r'<text\b[^>]*\bx="([\d.]+)"[^>]*\bclass="%s"' % cls, s)
+        if size and x:
+            em = 0.6 if "monospace" in css.group(0) else 0.58
+            end = float(x.group(1)) + len(text) * float(size.group(1)) * em
+            if end > BOX[0] - 10:
+                print(f'warning: {path.name}: line "{text}" ends near x={end:.0f}, '
+                      f"close to the net (starts at x={BOX[0]}). Shorten it or move BOX.")
+    alt = escape(HEADER_ALT, {'"': "&quot;"})
+    s, n = re.subn(r'(<svg\b[^>]*\baria-label=")[^"]*(")', lambda m: m.group(1) + alt + m.group(2), s, count=1)
+    if n != 1:
+        sys.exit(f"error: {path} has no aria-label on the <svg> tag. Edit it by hand or restore the original.")
+    return s
 
 for name, (pal, ec, eo, ro) in THEMES.items():
     path = ASSETS / f"header-{name}.svg"
@@ -292,6 +371,7 @@ for name, (pal, ec, eo, ro) in THEMES.items():
     # below match "\n", so normalize first. SVG/XML accepts LF everywhere.
     s = s.replace("\r\n", "\n")
     s = fit_canvas(s, path)
+    s = set_text(s, path)
     # Drop the old 2D network: CSS for .edge/.node and the two <g> blocks.
     s = re.sub(r"\s*\.edge\{[^}]*\}", "", s)
     s = re.sub(r"\s*\.node\{[^}]*\}", "", s)
