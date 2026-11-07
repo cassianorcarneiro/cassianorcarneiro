@@ -29,6 +29,12 @@ Why sampling
     over one revolution and writes each attribute as ONE <animate values="...">.
     CYCLE must divide T so the loop closes exactly.
 
+Canvas
+    The script also resizes each SVG to HEIGHT (viewBox, height, the two background
+    rects). The text block stays vertically centred and the wave stays at the
+    bottom, both through a transform attribute. It stops with an error if the SVG
+    header does not have the expected layout. Re-running is safe.
+
 Usage:
     python3 scripts/gen_net.py            # uses ../assets relative to this file
     python3 scripts/gen_net.py <dir>      # dir containing header-dark/light.svg
@@ -47,7 +53,11 @@ for _n in ("dark", "light"):
 REDUCTION = 2.0
 
 
-BOX = (750, 28, 1162, 234)     # x0, y0, x1, y1 on the 1200x320 canvas
+HEIGHT = 400                   # total image height in px. Text stays centred and the wave stays at
+                               # the bottom. The net's box grows with it (see BOX). If the net stops
+                               # filling the width, adjust SWING: the script prints how much BOX is used.
+assert HEIGHT >= 240, "HEIGHT too small for the net box"
+BOX = (750, 28, 1162, HEIGHT - 86)   # x0, y0, x1, y1 of the net on the 1200 x HEIGHT canvas
 # (nodes, ring radius), apex -> base.
 LAYERS = [(9, 0.30), (9, 0.52), (9, 0.74), (9, 0.96), (9, 1.18)]
 K = 5                          # edges per node into the next ring
@@ -57,9 +67,9 @@ AXIS_TILT = math.radians(5)    # rotation axis slightly off the cone axis
 PIVOT = 0.5                     # 0 = apex fixed, 1 = base fixed, 0.5 = apex and base move oppositely
 
 T = 18.0 / REDUCTION            # seconds per revolution
-SWING = 4.5                     # apex-to-base distance when the cone is fully open.
-                                # The net is as tall as BOX allows (ring diameter), so this sets its width:
-                                # larger = longer cone. The script prints how much of BOX is used.
+SWING = 3.0                     # apex-to-base distance when the cone is fully open.
+                                # Sets the length of the net. Ring diameter sets its height, so the fit is
+                                # limited by one of the two. The script prints which, and how much of BOX is used.
 PASS_T = 9.0 / REDUCTION        # s the rings take to cross each other
 HOLD_T = 0.0 / REDUCTION        # s of rest at each extreme. 0 = continuous motion
 CYCLE = 2 * (HOLD_T + PASS_T)   # s for the full sequence. Must divide T.
@@ -155,8 +165,8 @@ for k in range(N + 1):
                          + math.sin(theta[i]) * rk[layer_of[i]][2][d] for d in range(3))
                    for i in range(len(theta))])
 
-# Fit the whole animation envelope (rotation, motion and flip, ring ellipses
-# included) into BOX.
+# Fit the whole animation envelope (rotation, motion, ring ellipses included)
+# into BOX.
 allx = [p[0] for fr in frames for p in fr]
 ally = [p[1] for fr in frames for p in fr]
 for rk in rings:
@@ -238,6 +248,34 @@ def build(pal, edge_col, edge_op, ring_op):
     out.append("  </g>")
     return "\n".join(out)
 
+def fit_canvas(s, path):
+    """Resize the header canvas to HEIGHT. Sets absolute values, so it is safe to re-run
+    and to go back to a smaller HEIGHT. The layout was designed at 320 px: the text
+    group is shifted by half the extra height (stays centred) and the wave by all of it
+    (stays at the same distance from the bottom)."""
+    extra = HEIGHT - 320
+    h = f"{HEIGHT:g}"
+    s, n1 = re.subn(r'viewBox="0 0 1200 [\d.]+"', f'viewBox="0 0 1200 {h}"', s, count=1)
+    s, n2 = re.subn(r'(<svg\b[^>]*?\sheight=")[\d.]+(")', rf'\g<1>{h}\g<2>', s, count=1)
+    s, n3 = re.subn(r'(<rect width="1200" height=")[\d.]+(" fill="url\(#(?:bg|grid)\)"/>)',
+                    rf'\g<1>{h}\g<2>', s)
+
+    def place(s, classes, dy):
+        def fix(m):
+            tag = re.sub(r'\s+transform="[^"]*"', "", m.group(0))
+            if dy == 0: return tag
+            end = "/>" if tag.endswith("/>") else ">"
+            return tag[:-len(end)] + f' transform="translate(0 {dy:g})"' + end
+        return re.subn(r'<(?:g|path)\b[^>]*\bclass="(?:%s)"[^>]*>' % "|".join(classes), fix, s)
+
+    s, n4 = place(s, ["fade"], extra / 2)            # text block
+    s, n5 = place(s, ["wave", "wave2"], extra)       # the two wave paths
+    if (n1, n2, n3, n4, n5) != (1, 1, 2, 1, 2):
+        sys.exit(f"error: {path} does not have the expected header layout "
+                 f"(viewBox, svg height, 2 background rects, 1 .fade group, 2 wave paths; "
+                 f"found {n1}, {n2}, {n3}, {n4}, {n5}). Edit it by hand or restore the original.")
+    return s
+
 THEMES = {   # palette, edge colour, edge opacity, ring opacity
     "dark":  (("#22d3ee", "#818cf8", "#f472b6"), "#8b949e", ".22", ".55"),
     "light": (("#0891b2", "#6366f1", "#db2777"), "#8c959f", ".38", ".6"),
@@ -253,6 +291,7 @@ for name, (pal, ec, eo, ro) in THEMES.items():
     # Git on Windows (core.autocrlf=true) checks files out with CRLF. The regexes
     # below match "\n", so normalize first. SVG/XML accepts LF everywhere.
     s = s.replace("\r\n", "\n")
+    s = fit_canvas(s, path)
     # Drop the old 2D network: CSS for .edge/.node and the two <g> blocks.
     s = re.sub(r"\s*\.edge\{[^}]*\}", "", s)
     s = re.sub(r"\s*\.node\{[^}]*\}", "", s)
