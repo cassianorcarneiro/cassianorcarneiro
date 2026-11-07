@@ -92,7 +92,7 @@ HEADER_ALT = "Cassiano — Electrical Engineer (MSc), Dev, ML Researcher"   # ar
 # (nodes, ring radius), apex -> base.
 
 LAYERS = [(9, 0.30), (9, 0.52), (9, 0.74), (9, 0.96), (9, 1.18)]
-K = 5                                                               # edges per node into the next ring
+K = 10                                                               # edges per node into the next ring
 YAW, PITCH = math.radians(16), math.radians(14)                     # camera orientation
 AXIS_TILT = math.radians(5)                                         # rotation axis slightly off the cone axis
 
