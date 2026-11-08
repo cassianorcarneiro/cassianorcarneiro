@@ -88,13 +88,13 @@ SHOW_WAVE = False
 
 # x0, y0, x1, y1 of the net on the 1200 x HEIGHT canvas
 
-BOX = (750, 28, 1162, HEIGHT - (86 if SHOW_WAVE else 28))
+BOX = (800, 28, 1162, HEIGHT - (86 if SHOW_WAVE else 28))
 
 # Header text, written into both SVGs. Plain text: the script escapes & < > and quotes.
 
 HEADER_TOP = "~/cassianorcarneiro"                                          # small cyan line above the name
 HEADER_NAME = "Cassiano"                                                    # large title
-HEADER_SUB = "Electrical Engineer, MSc · Dev · ML Researcher"              # monospace subtitle
+HEADER_SUB = "Electrical Engineer, MSc · Developer · ML Researcher"              # monospace subtitle
 HEADER_TAG = ""                                                             # small grey line at the bottom
 HEADER_ALT = "Cassiano — Electrical Engineer MSc, Dev, ML Researcher"     # aria-label (screen readers)
 
@@ -102,7 +102,7 @@ HEADER_ALT = "Cassiano — Electrical Engineer MSc, Dev, ML Researcher"     # ar
 # so a bigger title pushes the lines below it down instead of overlapping them.
 
 HEADER_TOP_SIZE = 16
-HEADER_NAME_SIZE = 140
+HEADER_NAME_SIZE = 155
 HEADER_SUB_SIZE = 22
 HEADER_TAG_SIZE = 17
 
