@@ -42,7 +42,8 @@ Canvas
 Text
     The header strings are the HEADER_* constants below. The script writes them
     into the four <text> lines and the aria-label of both SVGs, XML-escaped.
-    Position and font stay in the SVG (x, y and the .tag/.name/.sub/.tag2 CSS).
+    The HEADER_*_SIZE constants set the font sizes. The script also restacks the
+    baselines (y) from those sizes. x, font family and colour stay in the SVG CSS.
     The script warns if a line is long enough to reach the net.
 
 Usage:
@@ -96,6 +97,14 @@ HEADER_NAME = "Cassiano"                                                    # la
 HEADER_SUB = "Electrical Engineer (MSc) · Dev · ML Researcher"              # monospace subtitle
 HEADER_TAG = ""                                                             # small grey line at the bottom
 HEADER_ALT = "Cassiano — Electrical Engineer (MSc), Dev, ML Researcher"     # aria-label (screen readers)
+
+# Font sizes in px. The script also restacks the lines from these sizes,
+# so a bigger title pushes the lines below it down instead of overlapping them.
+
+HEADER_TOP_SIZE = 16
+HEADER_NAME_SIZE = 100
+HEADER_SUB_SIZE = 22
+HEADER_TAG_SIZE = 17
 
 # (nodes, ring radius), apex -> base.
 
@@ -311,25 +320,30 @@ def build(pal, edge_col, edge_op, ring_op):
     out.append("  </g>")
     return "\n".join(out)
 
-def text_mid(s):
+HEADER_LINES = [("tag", HEADER_TOP, HEADER_TOP_SIZE), ("name", HEADER_NAME, HEADER_NAME_SIZE),
+                ("sub", HEADER_SUB, HEADER_SUB_SIZE), ("tag2", HEADER_TAG, HEADER_TAG_SIZE)]
+
+def text_layout():
 
     """
-    Vertical middle of the visible text block in the SVG's own coordinates.
-    Empty HEADER_* lines are ignored. Per line: top = y - 0.94 * size and
-    bottom = y + 0.23 * size (ascent and descent, measured in Chromium).
+    Stack the non-empty lines top to bottom. Returns {class: (size, baseline_y)}
+    and the block's (top, bottom). Per line: ascent = 0.94 * size and descent =
+    0.23 * size (measured in Chromium). The gap above each line is a design
+    constant; the first line starts at y = 48.96. Empty lines are skipped.
     """
 
-    lines = {"tag": HEADER_TOP, "name": HEADER_NAME, "sub": HEADER_SUB, "tag2": HEADER_TAG}
-    tops, bots = [], []
-    for cls, text in lines.items():
+    gap = {"name": 6.16, "sub": 8.6, "tag2": 14.96}
+    out, top, prev = {}, None, None
+    for cls, text, size in HEADER_LINES:
         if not text.strip(): continue
-        y = re.search(r'<text\b[^>]*\by="([\d.]+)"[^>]*\bclass="%s"' % cls, s)
-        css = re.search(r'\.%s\{font:[^}]*\}' % cls, s)
-        size = re.search(r'(\d+(?:\.\d+)?)px', css.group(0)) if css else None
-        if not (y and size): return 134.0          # fallback: 4-line block of the 320 px design
-        tops.append(float(y.group(1)) - 0.94 * float(size.group(1)))
-        bots.append(float(y.group(1)) + 0.23 * float(size.group(1)))
-    return (min(tops) + max(bots)) / 2 if tops else 134.0
+        y = (48.96 if prev is None else prev + gap[cls]) + 0.94 * size
+        if top is None: top = y - 0.94 * size
+        prev = y + 0.23 * size
+        out[cls] = (size, round(y, 2))
+    return out, (top, prev) if top is not None else (48.96, 219.0)
+
+def text_mid():
+    return sum(text_layout()[1]) / 2
 
 def fit_canvas(s, path):
     """Resize the header canvas to HEIGHT. Sets absolute values, so it is safe to re-run
@@ -353,7 +367,7 @@ def fit_canvas(s, path):
 
     # With the wave, the text sits centred in the space above it (shift extra / 2).
     # Without it, centre the visible text on the full height.
-    dy_text = extra / 2 if SHOW_WAVE else HEIGHT / 2 - text_mid(s)
+    dy_text = extra / 2 if SHOW_WAVE else HEIGHT / 2 - text_mid()
     s, n4 = place(s, ["fade"], dy_text)              # text block
     s, n5 = place(s, ["wave", "wave2"], extra, SHOW_WAVE)   # the two wave paths
     if (n1, n2, n3, n4, n5) != (1, 1, 2, 1, 2):
@@ -369,20 +383,28 @@ def set_text(s, path):
     Also warns when a line is probably long enough to reach the net.
     """
 
-    lines = {"tag": HEADER_TOP, "name": HEADER_NAME, "sub": HEADER_SUB, "tag2": HEADER_TAG}
-    for cls, text in lines.items():
+    lay = text_layout()[0]
+    for cls, text, size in HEADER_LINES:
         s, n = re.subn(r'(<text\b[^>]*\bclass="%s"[^>]*>)[^<]*(</text>)' % cls,
                        lambda m: m.group(1) + escape(text) + m.group(2), s)
         if n != 1:
             sys.exit(f'error: {path} should have exactly one <text class="{cls}">, found {n}. '
                      f"Edit it by hand or restore the original.")
+        # Font size: first "<number>px" inside the class rule (the weight has no unit).
+        s, n = re.subn(r'(\.%s\{font:[^}]*?\s)[\d.]+px' % cls, rf'\g<1>{size:g}px', s, count=1)
+        if n != 1:
+            sys.exit(f"error: {path} has no .{cls}{{font:... <size>px ...}} rule. Edit it by hand or restore the original.")
+        if cls in lay:                                  # baseline from the stacked layout
+            s, n = re.subn(r'(<text\b[^>]*\by=")[\d.]+("[^>]*\bclass="%s")' % cls,
+                           rf'\g<1>{lay[cls][1]:g}\g<2>', s, count=1)
+            if n != 1:
+                sys.exit(f'error: {path}: <text class="{cls}"> needs y before class. Edit it by hand or restore the original.')
         # Rough width check: monospace ~0.6 em per character, the bold sans title ~0.58 em.
         css = re.search(r'\.%s\{font:[^}]*\}' % cls, s)
-        size = re.search(r'(\d+(?:\.\d+)?)px', css.group(0)) if css else None
         x = re.search(r'<text\b[^>]*\bx="([\d.]+)"[^>]*\bclass="%s"' % cls, s)
-        if size and x:
+        if css and x:
             em = 0.6 if "monospace" in css.group(0) else 0.58
-            end = float(x.group(1)) + len(text) * float(size.group(1)) * em
+            end = float(x.group(1)) + len(text) * size * em
             if end > BOX[0] - 10:
                 print(f'warning: {path.name}: line "{text}" ends near x={end:.0f}, '
                       f"close to the net (starts at x={BOX[0]}). Shorten it or move BOX.")
@@ -402,8 +424,8 @@ for name, (pal, ec, eo, ro) in THEMES.items():
     # Git on Windows (core.autocrlf=true) checks files out with CRLF. The regexes
     # below match "\n", so normalize first. SVG/XML accepts LF everywhere.
     s = s.replace("\r\n", "\n")
-    s = fit_canvas(s, path)
     s = set_text(s, path)
+    s = fit_canvas(s, path)
     # Drop the old 2D network: CSS for .edge/.node and the two <g> blocks.
     s = re.sub(r"\s*\.edge\{[^}]*\}", "", s)
     s = re.sub(r"\s*\.node\{[^}]*\}", "", s)
