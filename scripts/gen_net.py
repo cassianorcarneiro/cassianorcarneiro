@@ -101,8 +101,8 @@ HEADER_ALT = "Cassiano — Electrical Engineer (MSc), Dev, ML Researcher"     # 
 LAYERS = [(9, 0.30), (9, 0.52), (9, 0.74), (9, 0.96), (9, 1.18)]
 
 K = 10                                              # edges per node into the next ring
-YAW, PITCH = math.radians(16), math.radians(14)     # camera orientation
-AXIS_TILT = math.radians(15)                         # rotation axis slightly off the cone axis
+YAW, PITCH = math.radians(30), math.radians(60)     # camera orientation
+AXIS_TILT = math.radians(0)                         # rotation axis slightly off the cone axis
 
 PIVOT = 0.5                     # 0 = apex fixed, 1 = base fixed, 0.5 = apex and base move oppositely
 
@@ -116,7 +116,8 @@ PASS_T = 9.0 / REDUCTION        # s the rings take to cross each other
 HOLD_T = 0.0 / REDUCTION        # s of rest at each extreme. 0 = continuous motion
 CYCLE = 2 * (HOLD_T + PASS_T)   # s for the full sequence. Must divide T.
 RING_OUTLINE = False            # True draws each ring as a thin ellipse through its nodes
-N = 96                          # frames per revolution (linear interpolation)
+
+N = 120                          # frames per revolution (linear interpolation)
 
 assert PASS_T > 0 and HOLD_T >= 0, "PASS_T must be > 0 and HOLD_T >= 0"
 assert abs(T / CYCLE - round(T / CYCLE)) < 1e-9, "CYCLE = 2*(HOLD_T+PASS_T) must divide T"
