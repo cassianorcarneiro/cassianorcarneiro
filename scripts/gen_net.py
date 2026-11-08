@@ -35,6 +35,8 @@ Canvas
     rects). The text block stays vertically centred and the wave stays at the
     bottom, both through a transform attribute. It stops with an error if the SVG
     header does not have the expected layout. Re-running is safe.
+    SHOW_WAVE = False hides the two wave paths (display="none"). The paths stay in
+    the file, so SHOW_WAVE = True brings them back on the next run.
 
 Text
     The header strings are the HEADER_* constants below. The script writes them
@@ -77,24 +79,30 @@ THEMES = {
 HEIGHT = 500                   
 assert HEIGHT >= 240, "HEIGHT too small for the net box"
 
+# True: wave at the bottom. False: wave hidden. Without the wave, the bottom
+# margin in BOX (86 px) is free: lower it to let the net use that space.
+
+SHOW_WAVE = False
+
 # x0, y0, x1, y1 of the net on the 1200 x HEIGHT canvas
 
 BOX = (750, 28, 1162, HEIGHT - 86)
 
 # Header text, written into both SVGs. Plain text: the script escapes & < > and quotes.
 
-HEADER_TOP = "~/cassianorcarneiro"                                              # small cyan line above the name
-HEADER_NAME = "Cassiano"                                                        # large title
-HEADER_SUB = "Electrical Engineer (MSc) · Dev · ML Researcher"            # monospace subtitle
-HEADER_TAG = ""                                                                 # small grey line at the bottom
-HEADER_ALT = "Cassiano — Electrical Engineer (MSc), Dev, ML Researcher"   # aria-label (screen readers)
+HEADER_TOP = "~/cassianorcarneiro"                                          # small cyan line above the name
+HEADER_NAME = "Cassiano"                                                    # large title
+HEADER_SUB = "Electrical Engineer (MSc) · Dev · ML Researcher"              # monospace subtitle
+HEADER_TAG = ""                                                             # small grey line at the bottom
+HEADER_ALT = "Cassiano — Electrical Engineer (MSc), Dev, ML Researcher"     # aria-label (screen readers)
 
 # (nodes, ring radius), apex -> base.
 
 LAYERS = [(9, 0.30), (9, 0.52), (9, 0.74), (9, 0.96), (9, 1.18)]
-K = 10                                                               # edges per node into the next ring
-YAW, PITCH = math.radians(16), math.radians(14)                     # camera orientation
-AXIS_TILT = math.radians(5)                                         # rotation axis slightly off the cone axis
+
+K = 10                                              # edges per node into the next ring
+YAW, PITCH = math.radians(16), math.radians(14)     # camera orientation
+AXIS_TILT = math.radians(5)                         # rotation axis slightly off the cone axis
 
 PIVOT = 0.5                     # 0 = apex fixed, 1 = base fixed, 0.5 = apex and base move oppositely
 
@@ -314,16 +322,16 @@ def fit_canvas(s, path):
     s, n3 = re.subn(r'(<rect width="1200" height=")[\d.]+(" fill="url\(#(?:bg|grid)\)"/>)',
                     rf'\g<1>{h}\g<2>', s)
 
-    def place(s, classes, dy):
+    def place(s, classes, dy, show=True):
         def fix(m):
-            tag = re.sub(r'\s+transform="[^"]*"', "", m.group(0))
-            if dy == 0: return tag
+            tag = re.sub(r'\s+(?:transform|display)="[^"]*"', "", m.group(0))
             end = "/>" if tag.endswith("/>") else ">"
-            return tag[:-len(end)] + f' transform="translate(0 {dy:g})"' + end
+            extra = (f' transform="translate(0 {dy:g})"' if dy != 0 else "") + ("" if show else ' display="none"')
+            return tag[:-len(end)] + extra + end
         return re.subn(r'<(?:g|path)\b[^>]*\bclass="(?:%s)"[^>]*>' % "|".join(classes), fix, s)
 
     s, n4 = place(s, ["fade"], extra / 2)            # text block
-    s, n5 = place(s, ["wave", "wave2"], extra)       # the two wave paths
+    s, n5 = place(s, ["wave", "wave2"], extra, SHOW_WAVE)   # the two wave paths
     if (n1, n2, n3, n4, n5) != (1, 1, 2, 1, 2):
         sys.exit(f"error: {path} does not have the expected header layout "
                  f"(viewBox, svg height, 2 background rects, 1 .fade group, 2 wave paths; "

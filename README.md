@@ -8,7 +8,7 @@
 
 ### `01 · about`
 
-Electrical Engineer. **BSc from UFJF**, **MSc from USP**.
+Electrical Engineer. **BEng from UFJF**, **MSc from USP.**
 I work on **mathematical modeling, machine learning and complex computational systems**.
 My focus is problems where **structure, data and uncertainty** meet.
 That means mathematical models that must survive contact with noisy, real-world data.
