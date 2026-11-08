@@ -92,11 +92,11 @@ BOX = (800, 28, 1162, HEIGHT - (86 if SHOW_WAVE else 28))
 
 # Header text, written into both SVGs. Plain text: the script escapes & < > and quotes.
 
-HEADER_TOP = "~/cassianorcarneiro"                                          # small cyan line above the name
-HEADER_NAME = "Cassiano"                                                    # large title
-HEADER_SUB = "Electrical Engineer, MSc · Developer · ML Researcher"              # monospace subtitle
-HEADER_TAG = ""                                                             # small grey line at the bottom
-HEADER_ALT = "Cassiano — Electrical Engineer MSc, Dev, ML Researcher"     # aria-label (screen readers)
+HEADER_TOP = "~/cassianorcarneiro"                                                  # small cyan line above the name
+HEADER_NAME = "Cassiano"                                                            # large title
+HEADER_SUB = "Electrical Engineer, MSc · Developer · ML Researcher"                 # monospace subtitle
+HEADER_TAG = ""                                                                     # small grey line at the bottom
+HEADER_ALT = "Cassiano — Electrical Engineer, MSc · Developer · ML Researcher"      # aria-label (screen readers)
 
 # Font sizes in px. The script also restacks the lines from these sizes,
 # so a bigger title pushes the lines below it down instead of overlapping them.
