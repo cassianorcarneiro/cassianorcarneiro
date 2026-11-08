@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400" role="img" aria-label="Cassiano — Electrical Engineer (MSc), Dev, ML Researcher">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400" role="img" aria-label="Cassiano — Electrical Engineer MSc, Dev, ML Researcher">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0d1117"/>
@@ -32,7 +32,7 @@
   <g class="fade" transform="translate(0 39.53)">
     <text x="64" y="64" class="tag">~/cassianorcarneiro</text>
     <text x="64" y="205.44" class="name">Cassiano</text>
-    <text x="64" y="266.92" class="sub">Electrical Engineer (MSc) · Dev · ML Researcher</text>
+    <text x="64" y="266.92" class="sub">Electrical Engineer, MSc · Dev · ML Researcher</text>
     <text x="64" y="214" class="tag2"></text>
   </g>
 
