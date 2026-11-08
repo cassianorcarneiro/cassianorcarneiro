@@ -102,7 +102,7 @@ HEADER_ALT = "Cassiano — Electrical Engineer (MSc), Dev, ML Researcher"     # 
 # so a bigger title pushes the lines below it down instead of overlapping them.
 
 HEADER_TOP_SIZE = 16
-HEADER_NAME_SIZE = 100
+HEADER_NAME_SIZE = 140
 HEADER_SUB_SIZE = 22
 HEADER_TAG_SIZE = 17
 

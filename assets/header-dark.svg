@@ -13,7 +13,7 @@
       <path d="M40 0H0V40" fill="none" stroke="#1b2230" stroke-width="1"/>
     </pattern>
     <style>
-      .name{font:700 100px -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;fill:#e6edf3}
+      .name{font:700 140px -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;fill:#e6edf3}
       .sub{font:400 22px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#8b949e}
       .tag{font:400 16px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#22d3ee}
       .tag2{font:400 17px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#6e7681}
@@ -29,10 +29,10 @@
   <rect width="1200" height="500" fill="url(#bg)"/>
   <rect width="1200" height="500" fill="url(#grid)"/>
 
-  <g class="fade" transform="translate(0 112.93)">
+  <g class="fade" transform="translate(0 89.53)">
     <text x="64" y="64" class="tag">~/cassianorcarneiro</text>
-    <text x="64" y="167.84" class="name">Cassiano</text>
-    <text x="64" y="220.12" class="sub">Electrical Engineer (MSc) · Dev · ML Researcher</text>
+    <text x="64" y="205.44" class="name">Cassiano</text>
+    <text x="64" y="266.92" class="sub">Electrical Engineer (MSc) · Dev · ML Researcher</text>
     <text x="64" y="214" class="tag2"></text>
   </g>
 
