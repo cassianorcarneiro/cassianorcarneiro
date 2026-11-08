@@ -78,7 +78,7 @@ THEMES = {
 # the bottom. The net's box grows with it (see BOX). If the net stops
 # filling the width, adjust SWING: the script prints how much BOX is used.
 
-HEIGHT = 500                   
+HEIGHT = 400                   
 assert HEIGHT >= 240, "HEIGHT too small for the net box"
 
 # True: wave at the bottom. False: wave hidden, and the text block and the net
