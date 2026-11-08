@@ -35,8 +35,9 @@ Canvas
     rects). The text block stays vertically centred and the wave stays at the
     bottom, both through a transform attribute. It stops with an error if the SVG
     header does not have the expected layout. Re-running is safe.
-    SHOW_WAVE = False hides the two wave paths (display="none"). The paths stay in
-    the file, so SHOW_WAVE = True brings them back on the next run.
+    SHOW_WAVE = False hides the two wave paths (display="none") and centres the text
+    block and the net on the full height. The paths stay in the file, so
+    SHOW_WAVE = True brings them back on the next run.
 
 Text
     The header strings are the HEADER_* constants below. The script writes them
@@ -76,17 +77,17 @@ THEMES = {
 # the bottom. The net's box grows with it (see BOX). If the net stops
 # filling the width, adjust SWING: the script prints how much BOX is used.
 
-HEIGHT = 400                   
+HEIGHT = 500                   
 assert HEIGHT >= 240, "HEIGHT too small for the net box"
 
-# True: wave at the bottom. False: wave hidden. Without the wave, the bottom
-# margin in BOX (86 px) is free: lower it to let the net use that space.
+# True: wave at the bottom. False: wave hidden, and the text block and the net
+# are centred on the full height (the bottom margin of BOX drops from 86 to 28 px).
 
 SHOW_WAVE = False
 
 # x0, y0, x1, y1 of the net on the 1200 x HEIGHT canvas
 
-BOX = (750, 28, 1162, HEIGHT - 86)
+BOX = (750, 28, 1162, HEIGHT - (86 if SHOW_WAVE else 28))
 
 # Header text, written into both SVGs. Plain text: the script escapes & < > and quotes.
 
@@ -116,7 +117,7 @@ PASS_T = 9.0 / REDUCTION        # s the rings take to cross each other
 HOLD_T = 0.0 / REDUCTION        # s of rest at each extreme. 0 = continuous motion
 CYCLE = 2 * (HOLD_T + PASS_T)   # s for the full sequence. Must divide T.
 RING_OUTLINE = False            # True draws each ring as a thin ellipse through its nodes
-N = 120                         # frames per revolution (linear interpolation)
+N = 96                          # frames per revolution (linear interpolation)
 
 assert PASS_T > 0 and HOLD_T >= 0, "PASS_T must be > 0 and HOLD_T >= 0"
 assert abs(T / CYCLE - round(T / CYCLE)) < 1e-9, "CYCLE = 2*(HOLD_T+PASS_T) must divide T"
@@ -310,6 +311,26 @@ def build(pal, edge_col, edge_op, ring_op):
     out.append("  </g>")
     return "\n".join(out)
 
+def text_mid(s):
+
+    """
+    Vertical middle of the visible text block in the SVG's own coordinates.
+    Empty HEADER_* lines are ignored. Per line: top = y - 0.94 * size and
+    bottom = y + 0.23 * size (ascent and descent, measured in Chromium).
+    """
+
+    lines = {"tag": HEADER_TOP, "name": HEADER_NAME, "sub": HEADER_SUB, "tag2": HEADER_TAG}
+    tops, bots = [], []
+    for cls, text in lines.items():
+        if not text.strip(): continue
+        y = re.search(r'<text\b[^>]*\by="([\d.]+)"[^>]*\bclass="%s"' % cls, s)
+        css = re.search(r'\.%s\{font:[^}]*\}' % cls, s)
+        size = re.search(r'(\d+(?:\.\d+)?)px', css.group(0)) if css else None
+        if not (y and size): return 134.0          # fallback: 4-line block of the 320 px design
+        tops.append(float(y.group(1)) - 0.94 * float(size.group(1)))
+        bots.append(float(y.group(1)) + 0.23 * float(size.group(1)))
+    return (min(tops) + max(bots)) / 2 if tops else 134.0
+
 def fit_canvas(s, path):
     """Resize the header canvas to HEIGHT. Sets absolute values, so it is safe to re-run
     and to go back to a smaller HEIGHT. The layout was designed at 320 px: the text
@@ -330,7 +351,10 @@ def fit_canvas(s, path):
             return tag[:-len(end)] + extra + end
         return re.subn(r'<(?:g|path)\b[^>]*\bclass="(?:%s)"[^>]*>' % "|".join(classes), fix, s)
 
-    s, n4 = place(s, ["fade"], extra / 2)            # text block
+    # With the wave, the text sits centred in the space above it (shift extra / 2).
+    # Without it, centre the visible text on the full height.
+    dy_text = extra / 2 if SHOW_WAVE else HEIGHT / 2 - text_mid(s)
+    s, n4 = place(s, ["fade"], dy_text)              # text block
     s, n5 = place(s, ["wave", "wave2"], extra, SHOW_WAVE)   # the two wave paths
     if (n1, n2, n3, n4, n5) != (1, 1, 2, 1, 2):
         sys.exit(f"error: {path} does not have the expected header layout "
