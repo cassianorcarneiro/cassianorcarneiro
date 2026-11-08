@@ -102,7 +102,7 @@ LAYERS = [(9, 0.30), (9, 0.52), (9, 0.74), (9, 0.96), (9, 1.18)]
 
 K = 10                                              # edges per node into the next ring
 YAW, PITCH = math.radians(16), math.radians(14)     # camera orientation
-AXIS_TILT = math.radians(5)                         # rotation axis slightly off the cone axis
+AXIS_TILT = math.radians(15)                         # rotation axis slightly off the cone axis
 
 PIVOT = 0.5                     # 0 = apex fixed, 1 = base fixed, 0.5 = apex and base move oppositely
 
